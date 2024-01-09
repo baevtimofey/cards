@@ -11,8 +11,8 @@ from core.config import settings
 class DatabaseHelper:
     def __init__(self, url: str, echo: bool = False):
         self.engine = create_async_engine(
-            url=settings.db_url,
-            echo=settings.db_echo,
+            url=url,
+            echo=echo,
         )
         self.session_factory = async_sessionmaker(
             bind=self.engine,
