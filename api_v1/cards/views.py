@@ -15,7 +15,7 @@ router = APIRouter(tags=["Cards"])
 
 @router.get("/", response_model=list[Card])
 async def get_cards(
-        session: AsyncSession = Depends(db_helper.scoped_session_dependency),
+        session: AsyncSession = Depends(db_helper.get_async_session),
 ):
     return await crud.get_cards(session=session)
 
@@ -27,7 +27,7 @@ async def get_cards(
 )
 async def create_card(
         card_in: CardCreate,
-        session: AsyncSession = Depends(db_helper.scoped_session_dependency),
+        session: AsyncSession = Depends(db_helper.get_async_session),
 ):
     return await crud.create_card(session=session, card_in=card_in)
 
@@ -43,7 +43,7 @@ async def get_card(
 async def update_card(
         card_update: CardUpdate,
         card: Card = Depends(card_by_id),
-        session: AsyncSession = Depends(db_helper.scoped_session_dependency)
+        session: AsyncSession = Depends(db_helper.get_async_session)
 ):
     return await crud.update_card(
         session=session,
