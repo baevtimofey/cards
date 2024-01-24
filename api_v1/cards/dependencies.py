@@ -13,7 +13,7 @@ from . import crud
 
 async def card_by_id(
         card_id: Annotated[int, Path],
-        session: AsyncSession = Depends(db_helper.scoped_session_dependency)
+        session: AsyncSession = Depends(db_helper.get_async_session)
 ) -> Card:
     product = await crud.get_card(session=session, card_id=card_id)
     if product:
